@@ -1,15 +1,19 @@
 import './App.css'
-import ReactDOM from "react-dom/client";
-import Home from "./views/Home"
-function App() {
 
+import { Route, Routes } from 'react-router-dom';
+
+import HomePage from "./views/HomePage"
+import Navigation from './components/Navigation';
+
+function App() {
   return (
     <>
-      <BrowserRouter>
+        <Navigation />
         <Routes>
-          <Route index element={<Home />} />
+          <Route 
+            path="/" 
+            element={<HomePage />} />
         </Routes>
-      </BrowserRouter >
     </>
   )
 }
