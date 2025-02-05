@@ -1,4 +1,4 @@
-import Navigation from "./assets/components/Navigation"
+import Navigation from "../components/Navigation";
 function Home () {
     return (
         <>
