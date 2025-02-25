@@ -6,22 +6,32 @@ import HomePage from "./views/HomePage"
 import Navigation from './components/Navigation';
 import Register from './views/Register';
 import Login from './views/Login';
+import Help from './views/Help';
+import Contact from './components/Contact';
+import Privacy from './views/Privacy';
 
 function App() {
   return (
     <>
-        <Navigation />
-        <Routes>
-          <Route 
-            path="/" 
-            element={<HomePage />} />
-          <Route 
-            path="/Registrarse" 
-            element={<Register />} />
-             <Route 
-            path="/Login" 
-            element={<Login />} />
-        </Routes>
+      <Navigation />
+      <Routes>
+        <Route
+          path="/"
+          element={<HomePage />} />
+        <Route
+          path="/Registrarse"
+          element={<Register />} />
+        <Route
+          path="/Login"
+          element={<Login />} />
+        <Route
+          path="/Ayuda"
+          element={<Help />} />
+        <Route
+          path="/Privacidad"
+          element={<Privacy />} />
+      </Routes>
+      <Contact />
     </>
   )
 }
