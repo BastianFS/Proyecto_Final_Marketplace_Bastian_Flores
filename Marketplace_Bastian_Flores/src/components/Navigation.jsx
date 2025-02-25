@@ -52,7 +52,7 @@ function Navigation() {
                             </Link>
                         </Nav.Link>
                         <Nav.Link>
-                            <Link className="text-reset text-decoration-none d-flex" to="/">
+                            <Link className="text-reset text-decoration-none d-flex" to="/Login">
                                 <Container className='d-flex align-items-center'>
                                     <span style={{color: "grey"}}>
                                         <i className="fa-solid fa-right-to-bracket pe-2 fa-2xl"></i>
@@ -62,7 +62,7 @@ function Navigation() {
                             </Link>
                         </Nav.Link>
                         <Nav.Link>
-                            <Link className="text-reset text-decoration-none" to="/">
+                            <Link className="text-reset text-decoration-none" to="/Registrarse">
                             <Container className='d-flex align-items-center'>
                                     <span style={{color: "grey"}}>
                                         <i className="fa-solid fa-user pe-2 fa-2xl"></i>
