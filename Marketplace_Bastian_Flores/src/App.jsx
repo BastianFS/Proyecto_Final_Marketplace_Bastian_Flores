@@ -9,6 +9,8 @@ import Login from './views/Login';
 import Help from './views/Help';
 import Contact from './components/Contact';
 import Privacy from './views/Privacy';
+import Cart from './views/Cart';
+import ProductsCategory from './views/ProductsCategory';
 
 function App() {
   return (
@@ -30,6 +32,12 @@ function App() {
         <Route
           path="/Privacidad"
           element={<Privacy />} />
+        <Route
+          path="/Carrito"
+          element={<Cart />} />
+        <Route
+          path="/Categorias"
+          element={<ProductsCategory />} />
       </Routes>
       <Contact />
     </>

@@ -71,6 +71,16 @@ function Navigation() {
                                 </Container>
                             </Link>
                         </Nav.Link>
+                        <Nav.Link>
+                            <Link className="text-reset text-decoration-none" to="/Carrito">
+                            <Container className='d-flex align-items-center'>
+                                    <span style={{color: "grey"}}>
+                                        <i className="fa-solid fa-cart-shopping pe-2 fa-2xl"></i>
+                                    </span>
+                                    <h4 className='text-white p-2'>Carrito</h4>
+                                </Container>
+                            </Link>
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
