@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -10,8 +10,13 @@ import Button from 'react-bootstrap/Button';
 
 import { Link } from 'react-router-dom';
 
+import { CartContext } from '../assets/CartContext';
+
 
 function Navigation() {
+
+    const {cart} = useContext(CartContext)
+    
     return (
         <Navbar expand="lg" className='bg-dark'>
             <Container className='container-fluid'>
@@ -44,7 +49,7 @@ function Navigation() {
                         <Nav.Link className>
                             <Link className="text-reset text-decoration-none" to="/">
                                 <Container className='d-flex align-items-center'>
-                                    <span style={{color: "grey"}}>
+                                    <span style={{ color: "grey" }}>
                                         <i className="fa-solid fa-house fa-xl pe-1"></i>
                                     </span>
                                     <h2 className='text-white p-2'>Inicio</h2>
@@ -54,7 +59,7 @@ function Navigation() {
                         <Nav.Link>
                             <Link className="text-reset text-decoration-none d-flex" to="/Login">
                                 <Container className='d-flex align-items-center'>
-                                    <span style={{color: "grey"}}>
+                                    <span style={{ color: "grey" }}>
                                         <i className="fa-solid fa-right-to-bracket pe-2 fa-2xl"></i>
                                     </span>
                                     <h4 className='text-white p-2'>Iniciar Sesión</h4>
@@ -63,8 +68,8 @@ function Navigation() {
                         </Nav.Link>
                         <Nav.Link>
                             <Link className="text-reset text-decoration-none" to="/Registrarse">
-                            <Container className='d-flex align-items-center'>
-                                    <span style={{color: "grey"}}>
+                                <Container className='d-flex align-items-center'>
+                                    <span style={{ color: "grey" }}>
                                         <i className="fa-solid fa-user pe-2 fa-2xl"></i>
                                     </span>
                                     <h4 className='text-white p-2'>Registrarse</h4>
@@ -73,11 +78,15 @@ function Navigation() {
                         </Nav.Link>
                         <Nav.Link>
                             <Link className="text-reset text-decoration-none" to="/Carrito">
-                            <Container className='d-flex align-items-center'>
-                                    <span style={{color: "grey"}}>
+                                <Container className='d-flex align-items-center'>
+                                    <span style={{ color: "grey" }}>
                                         <i className="fa-solid fa-cart-shopping pe-2 fa-2xl"></i>
                                     </span>
-                                    <h4 className='text-white p-2'>Carrito</h4>
+                                    <div className='d-flex flex-cloumn'>
+                                        <h4 className='text-white p-2'>Carrito</h4>
+                                        <p></p>
+                                    </div>
+
                                 </Container>
                             </Link>
                         </Nav.Link>

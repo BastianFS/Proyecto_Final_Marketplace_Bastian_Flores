@@ -5,6 +5,7 @@ import Col from "react-bootstrap/esm/Col";
 import Card from "react-bootstrap/esm/Card";
 import Button from "react-bootstrap/esm/Button";
 import Contact from "../components/Contact";
+import ShoppingCartApp from "../components/ShoppingCartApp";
 
 function Cart() {
     return (
@@ -15,9 +16,7 @@ function Cart() {
                 <Col>
                     <Row>
                         <Col>
-                            <h1 className="text-center">
-                                Carro de compras
-                            </h1>
+                            <ShoppingCartApp />
                         </Col>
                     </Row>
                     <Row>
