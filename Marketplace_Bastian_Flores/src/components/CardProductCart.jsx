@@ -4,16 +4,18 @@ import { CartContext } from '../assets/CartContext';
 
 import Button from 'react-bootstrap/Button';
 import { Stack, Container, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
-function CardProduct({ product }) {
+function CardProductCart({ product }) {
 
     if (!product) return null;
-    const { addToCart } = useContext(CartContext);
+    const { addToCart, removeFromCart, cart } = useContext(CartContext);
+
+    const productInCart = cart.find((item) => item.id === product.id);
+    const productQty = productInCart ? productInCart.quantity : 0;
 
     return (
         <>
-            <Container style={{width:"18rem"}} className='d-flex flex-column align-items-end border p-0 m-0 mb-5'>
+            <Container className='d-flex flex-column align-items-end border p-0 m-0'>
                 <div style={{ height: "18rem" }} className='m-2'>
                     <Image fluid src={product.image_url} className='h-100' style={{ objectFit: "cover" }} />
                 </div>
@@ -23,22 +25,22 @@ function CardProduct({ product }) {
                 <div style={{ height: "9rem" }} className='m-3'>
                     <h5>{product.modelo}</h5>
                     <p>{product.description}</p>
-
+                    
                 </div>
                 <div style={{ height: "4rem" }}>
-                    <ul className='text-success fs-4 mt-4 me-5' >
-                        ${product.price.toLocaleString("de-DE")}
-                    </ul>
-                </div>
+                        <ul className='text-success fs-4 mt-4 me-5'>
+                            ${product.price.toLocaleString("de-DE")}
+                        </ul>
+                    </div>
                 <Stack direction='horizontal' className='m-2 ms-4 p-2'>
-                    <Link to="/Carrito">
-                        <Button className='m-3 p-3' onClick={() => addToCart(product)}>Comprar</Button>
-                    </Link>
-                    <Button className="m-2 ms-3" onClick={() => addToCart(product)}>Añadir al Carro</Button>
+                    <Button className="m-2 ms-3" onClick={() => addToCart(product)}>+</Button>
+                    <p className="m-2">{productQty}</p>
+                    <Button className="m-2" onClick={() => removeFromCart(product.id)}>-</Button>
                 </Stack>
             </Container>
+
         </>
     );
 };
 
-export default CardProduct; 
+export default CardProductCart;

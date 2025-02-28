@@ -1,35 +1,40 @@
 import { useContext } from "react";
-import CardProduct from "./CardProduct";
 import { CartContext } from "../assets/CartContext";
 import { PostsContext } from "../assets/PostsContext";
+import { Col, Row } from "react-bootstrap";
+import CardProductCart from "./CardProductCart";
 
 function ShoppingCartApp() {
 
 
-    const { cart, cartQty, totalPrice, addToCart, removeFromCart } = useContext(CartContext);
+    const { cart } = useContext(CartContext);
     const { products } = useContext(PostsContext);
 
     return (
         <>
-            <h1>${totalPrice.toLocaleString("de-DE")}</h1>
-            <h1>{cartQty}</h1>
             {cart.length > 0 ? (
-                cart.map((cartItem) => {
-                    const product = products.find((p) => p.id === cartItem.id);
-                    return product ? (
-                        <CardProduct
-                            key={cartItem.id}
-                            product={product}
-                            addToCart={addToCart}
-                            removeFromCart={removeFromCart}
-                        />
-                    ) : null;
-                })
+                <>
+                    <Row md={2} className="m-3">
+                        {cart.map((cartItem) => {
+                            const product = products.find((p) => p.id === cartItem.id);
+                            return product ? (
+                                <Col md={3} className="mt-2 mb-2">
+                                    <CardProductCart
+                                        key={cartItem.id}
+                                        product={product}
+                                    />
+                                </Col>
+                            ) : null;
+                        })};
+                    </Row>
+                </>
+
             ) : (
                 <p>No hay productos en el carrito</p>
-            )}
+            )
+            };
         </>
     );
-};
+}
 
 export default ShoppingCartApp;

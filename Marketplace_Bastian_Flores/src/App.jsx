@@ -18,10 +18,9 @@ import { CartProvider } from './assets/CartContext';
 function App() {
   return (
     <>
-     <PostsProvider>
-      <CartProvider>
-          <BrowserRouter>
-            <Navigation />
+      <PostsProvider>
+        <CartProvider>     
+          <Navigation />
             <Routes>
               <Route
                 path="/"
@@ -46,9 +45,8 @@ function App() {
                 element={<ProductsCategory />} />
             </Routes>
             <Contact />
-          </BrowserRouter>
-          </CartProvider>
-          </PostsProvider>
+        </CartProvider>
+      </PostsProvider>
     </>
   )
 }

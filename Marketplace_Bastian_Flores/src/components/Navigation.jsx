@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
 
 import { Link } from 'react-router-dom';
 
@@ -15,10 +16,10 @@ import { CartContext } from '../assets/CartContext';
 
 function Navigation() {
 
-    const {cart} = useContext(CartContext)
-    
+    const {cartQty} = useContext(CartContext)
+
     return (
-        <Navbar expand="lg" className='bg-dark'>
+        <Navbar expand="lg" className='bg-dark'sticky="top">
             <Container className='container-fluid'>
                 <Navbar.Brand href="/" className='d-flex align-items-center'>
                     <div className='pb-2 me-4' style={{ width: "15%" }}>
@@ -82,9 +83,10 @@ function Navigation() {
                                     <span style={{ color: "grey" }}>
                                         <i className="fa-solid fa-cart-shopping pe-2 fa-2xl"></i>
                                     </span>
-                                    <div className='d-flex flex-cloumn'>
+                                    <div className='d-flex flex-cloumn align-items-center'>
                                         <h4 className='text-white p-2'>Carrito</h4>
-                                        <p></p>
+                                        <Badge bg="secondary">{cartQty}</Badge>
+                                        
                                     </div>
 
                                 </Container>
