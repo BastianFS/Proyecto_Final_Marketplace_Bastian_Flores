@@ -38,7 +38,6 @@ function CardProductCart({ product }) {
                     <Button className="m-2" onClick={() => removeFromCart(product.id)}>-</Button>
                 </Stack>
             </Container>
-
         </>
     );
 };

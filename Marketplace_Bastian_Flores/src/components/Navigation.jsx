@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -16,10 +18,20 @@ import { CartContext } from '../assets/CartContext';
 
 function Navigation() {
 
-    const {cartQty} = useContext(CartContext)
+    const { cartQty } = useContext(CartContext)
+
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+    const userName = localStorage.getItem("name") || "Usuario";
+
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate("/login");
+    };
+
 
     return (
-        <Navbar expand="lg" className='bg-dark'sticky="top">
+        <Navbar expand="lg" className='bg-dark' sticky="top">
             <Container className='container-fluid'>
                 <Navbar.Brand href="/" className='d-flex align-items-center'>
                     <div className='pb-2 me-4' style={{ width: "15%" }}>
@@ -46,55 +58,46 @@ function Navigation() {
                 </Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto align-items-center">
-                        <Nav.Link className>
-                            <Link className="text-reset text-decoration-none" to="/">
-                                <Container className='d-flex align-items-center'>
-                                    <span style={{ color: "grey" }}>
-                                        <i className="fa-solid fa-house fa-xl pe-1"></i>
-                                    </span>
-                                    <h2 className='text-white p-2'>Inicio</h2>
-                                </Container>
-                            </Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link className="text-reset text-decoration-none d-flex" to="/Login">
-                                <Container className='d-flex align-items-center'>
-                                    <span style={{ color: "grey" }}>
-                                        <i className="fa-solid fa-right-to-bracket pe-2 fa-2xl"></i>
-                                    </span>
-                                    <h4 className='text-white p-2'>Iniciar Sesión</h4>
-                                </Container>
-                            </Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link className="text-reset text-decoration-none" to="/Registrarse">
-                                <Container className='d-flex align-items-center'>
-                                    <span style={{ color: "grey" }}>
-                                        <i className="fa-solid fa-user pe-2 fa-2xl"></i>
-                                    </span>
-                                    <h4 className='text-white p-2'>Registrarse</h4>
-                                </Container>
-                            </Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link className="text-reset text-decoration-none" to="/Carrito">
-                                <Container className='d-flex align-items-center'>
-                                    <span style={{ color: "grey" }}>
-                                        <i className="fa-solid fa-cart-shopping pe-2 fa-2xl"></i>
-                                    </span>
-                                    <div className='d-flex flex-cloumn align-items-center'>
-                                        <h4 className='text-white p-2'>Carrito</h4>
-                                        <Badge bg="secondary">{cartQty}</Badge>
-                                        
-                                    </div>
+                    <Nav className='d-flex align-items-center'>
+                        <Button onClick={() => navigate("/")} className='d-flex align-items-center bg-dark border-0 m-1'>
+                            <i className="fa-solid fa-house pe-1" style={{ color: "grey" }} />
+                            <h5 className='text-white p-2'>Inicio</h5>
+                        </Button>
+                        {token ? (
+                            <>
+                                <Button onClick={() => navigate("/perfil")} className='d-flex align-items-center bg-dark border-0 m-1'>
+                                    <i className="fa-solid fa-right-to-bracket pe-2" style={{ color: "grey" }} />
+                                    <h5 className='text-white p-2'>{userName}</h5>
+                                </Button>
+                            </>
+                        ) : (
+                            <Button onClick={() => navigate("/login")} className='d-flex align-items-center bg-dark border-0 m-1'>
+                                <i className="fa-solid fa-right-to-bracket pe-2" style={{ color: "grey" }} />
+                                <h5 className='text-white p-2'>Iniciar Sesión</h5>
+                            </Button>
+                        )}
+                        {token ? ( null ) : (
+                        <Button onClick={() => navigate("/registro")} className='d-flex align-items-center bg-dark border-0 m-1'>
+                            <i className="fa-solid fa-user pe-2" style={{ color: "grey" }} />
+                            <h5 className='text-white p-2'>Registrarse</h5>
+                        </Button>
+                        )}
+                        <Button onClick={() => navigate("/carrito")} className='d-flex align-items-center bg-dark border-0 m-1'>
+                            <i className="fa-solid fa-cart-shopping pe-2" style={{ color: "grey" }} />
+                            <div className='d-flex flex-cloumn align-items-center'>
+                                <h5 className='text-white p-2'>Carrito</h5>
+                                <Badge bg="secondary">{cartQty}</Badge>
 
-                                </Container>
-                            </Link>
-                        </Nav.Link>
+                            </div>
+                        </Button>
+                        {token ? (
+                        <Button onClick={handleLogout} className='d-flex align-items-center bg-danger border-0 m-1'>
+                                    <p className='p-0 m-0'>Cerrar Sesión</p>
+                                </Button>
+                        ) : ( null )}
                     </Nav>
                 </Navbar.Collapse>
-            </Container>
+            </Container >
         </Navbar >
     );
 }

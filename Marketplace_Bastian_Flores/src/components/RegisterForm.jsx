@@ -1,32 +1,121 @@
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
 import Image from "react-bootstrap/esm/Image";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import HelpPrivacy from "./HelpPrivacy";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import { Alert } from "react-bootstrap";
 
 function RegisterForm() {
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        if (!name || !email || !password || !confirmPassword) {
+            setError("Todos los campos son obligatorios.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError("Las contraseñas no coinciden.");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+
+                localStorage.setItem("email", email);
+                localStorage.setItem("name", name);
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("id", data.id);
+
+                setError("");
+                navigate("/perfil")
+            } else {
+                setError("Error al registrar usuario.");
+            }
+        } catch (err) {
+            setError("No se pudo conectar al servidor.");
+        }
+    };
+
     return (
         <>
             <Row>
                 <Col className="p-0 m-0">
-                    <Image fluid src="Music.webp"/>
+                    <Image fluid src="Music.webp" />
                 </Col>
                 <Col className="p-0 m-0">
                     <Row className="pe-3 me-3">
-                        <Form className="p-5 flex-grow-1">
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Dirección de email</Form.Label>
-                                <Form.Control type="email" placeholder="Email" />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Contraseña</Form.Label>
-                                <Form.Control type="password" placeholder="Contraseña" />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Registrarse
-                            </Button>
-                        </Form>
+                        <Col>
+                            <Form className="p-5 flex-grow-1" onSubmit={handleSubmit}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Nombre</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Tu nombre"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)
+                                        }
+                                        required
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Correo Electrónico</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        placeholder="Email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Contraseña</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Contraseña"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Confirmar Contraseña</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="Repite la contraseña"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Registrarse
+                                </Button>
+                            </Form>
+                            {error && <Alert variant="danger">{error}</Alert>}
+                        </Col>
                     </Row>
                     <Row className="p-2 m-2 mt-5 pt-5">
                         <h1>
@@ -49,7 +138,7 @@ function RegisterForm() {
                     </Row>
                 </Col>
                 <Col className="d-flex bg-dark align-items-center p-0 m-0">
-                    <Image fluid src="Music2.webp"/>
+                    <Image fluid src="Music2.webp" />
                 </Col>
             </Row>
 
