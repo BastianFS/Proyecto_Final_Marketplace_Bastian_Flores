@@ -102,9 +102,6 @@ function Profile() {
                                     {favoritesPosts.map((favoritePost) => (
                                         <Col key={favoritePost.id} sm={6} md={6} lg={6} xl={6}>
                                             <CardPost post={favoritePost} />
-                                            <Button onClick={() => toggleFavorite( favoritePost.id)}> 
-                                                ❤️ Quitar de favoritos
-                                            </Button>
                                         </Col>
                                     ))}
                                 </Row>
