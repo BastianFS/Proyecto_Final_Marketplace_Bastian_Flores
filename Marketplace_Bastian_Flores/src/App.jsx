@@ -12,47 +12,63 @@ import Login from './views/Login';
 import Help from './views/Help';
 import Privacy from './views/Privacy';
 import Cart from './views/Cart';
-import ProductsCategory from './views/ProductsCategory';
 import Profile from './views/Profile';
+import Categories from './views/Categories';
 
 import { PostsProvider } from './assets/PostsContext';
 import { CartProvider } from './assets/CartContext';
+import { FavoritesProvider } from './assets/FavoritesContext';
+import { AuthProvider } from './assets/AuthContext';
+import { SearchProvider } from './assets/SearchContext';
+import { UploadPostProvider } from './assets/UploadPostContext';
+import UploadPost from './views/UploadPost';
 
 function App() {
   return (
     <>
-      <PostsProvider>
-        <CartProvider>
-          <Navigation />
-          <Routes>
-            <Route
-              path="/"
-              element={<HomePage />} />
-            <Route
-              path="/registro"
-              element={<Register />} />
-            <Route
-              path="/login"
-              element={<Login />} />
-            <Route
-              path="/ayuda"
-              element={<Help />} />
-            <Route
-              path="/privacidad"
-              element={<Privacy />} />
-            <Route
-              path="/carrito"
-              element={<Cart />} />
-            <Route
-              path="/categorias"
-              element={<ProductsCategory />} />
-            <Route
-              path="/perfil"
-              element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
-          </Routes>
-          <Contact />
-        </CartProvider>
-      </PostsProvider>
+      <AuthProvider>
+        <PostsProvider>
+          <CartProvider>
+            <FavoritesProvider>
+              <UploadPostProvider>
+                <SearchProvider>
+                  <Navigation />
+                  <Routes>
+                    <Route
+                      path="/"
+                      element={<HomePage />} />
+                    <Route
+                      path="/registro"
+                      element={<Register />} />
+                    <Route
+                      path="/login"
+                      element={<Login />} />
+                    <Route
+                      path="/ayuda"
+                      element={<Help />} />
+                    <Route
+                      path="/privacidad"
+                      element={<Privacy />} />
+                    <Route
+                      path="/carrito"
+                      element={<Cart />} />
+                    <Route
+                      path="/perfil"
+                      element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
+                    <Route
+                      path="/categorias"
+                      element={<Categories />} />
+                    <Route
+                      path="/publicar"
+                      element={<ProtectedRoutes><UploadPost /></ProtectedRoutes>} />
+                  </Routes>
+                  <Contact />
+                </SearchProvider>
+              </UploadPostProvider>
+            </FavoritesProvider>
+          </CartProvider>
+        </PostsProvider>
+      </AuthProvider>
     </>
   )
 }

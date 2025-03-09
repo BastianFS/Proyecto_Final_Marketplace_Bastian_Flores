@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -11,22 +11,26 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 
-import { Link } from 'react-router-dom';
-
 import { CartContext } from '../assets/CartContext';
+import { AuthContext } from '../assets/AuthContext';
+import SearchForm from './SearchForm';
 
 
 function Navigation() {
 
-    const { cartQty } = useContext(CartContext)
+    const { cartQty } = useContext(CartContext);
+    const { user, logout } = useContext(AuthContext);
 
     const navigate = useNavigate();
-    const token = localStorage.getItem("token");
-    const userName = localStorage.getItem("name") || "Usuario";
+
+    useEffect(() => {
+        
+        
+    }, [user]);
 
     const handleLogout = () => {
-        localStorage.clear();
-        navigate("/login");
+        logout();
+        navigate("/");
     };
 
 
@@ -42,19 +46,7 @@ function Navigation() {
                     </div>
                 </Navbar.Brand>
                 <Container className='container-fluid'>
-                    <Form inline>
-                        <Row>
-                            <Col xs="auto">
-                                <Form.Control
-                                    type="text"
-                                    className=" mr-sm-2"
-                                />
-                            </Col>
-                            <Col xs="auto">
-                                <Button type="submit">Buscar</Button>
-                            </Col>
-                        </Row>
-                    </Form>
+                    <SearchForm />
                 </Container>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -63,11 +55,11 @@ function Navigation() {
                             <i className="fa-solid fa-house pe-1" style={{ color: "grey" }} />
                             <h5 className='text-white p-2'>Inicio</h5>
                         </Button>
-                        {token ? (
+                        {user?.token ? (
                             <>
                                 <Button onClick={() => navigate("/perfil")} className='d-flex align-items-center bg-dark border-0 m-1'>
                                     <i className="fa-solid fa-right-to-bracket pe-2" style={{ color: "grey" }} />
-                                    <h5 className='text-white p-2'>{userName}</h5>
+                                    <h5 className='text-white p-2'>{user?.name}</h5>
                                 </Button>
                             </>
                         ) : (
@@ -76,11 +68,11 @@ function Navigation() {
                                 <h5 className='text-white p-2'>Iniciar Sesión</h5>
                             </Button>
                         )}
-                        {token ? ( null ) : (
-                        <Button onClick={() => navigate("/registro")} className='d-flex align-items-center bg-dark border-0 m-1'>
-                            <i className="fa-solid fa-user pe-2" style={{ color: "grey" }} />
-                            <h5 className='text-white p-2'>Registrarse</h5>
-                        </Button>
+                        {user?.token ? (null) : (
+                            <Button onClick={() => navigate("/registro")} className='d-flex align-items-center bg-dark border-0 m-1'>
+                                <i className="fa-solid fa-user pe-2" style={{ color: "grey" }} />
+                                <h5 className='text-white p-2'>Registrarse</h5>
+                            </Button>
                         )}
                         <Button onClick={() => navigate("/carrito")} className='d-flex align-items-center bg-dark border-0 m-1'>
                             <i className="fa-solid fa-cart-shopping pe-2" style={{ color: "grey" }} />
@@ -90,11 +82,11 @@ function Navigation() {
 
                             </div>
                         </Button>
-                        {token ? (
-                        <Button onClick={handleLogout} className='d-flex align-items-center bg-danger border-0 m-1'>
-                                    <p className='p-0 m-0'>Cerrar Sesión</p>
-                                </Button>
-                        ) : ( null )}
+                        {user?.token ? (
+                            <Button onClick={handleLogout} className='d-flex align-items-center bg-danger border-0 m-1'>
+                                <p className='p-0 m-0'>Cerrar Sesión</p>
+                            </Button>
+                        ) : (null)}
                     </Nav>
                 </Navbar.Collapse>
             </Container >

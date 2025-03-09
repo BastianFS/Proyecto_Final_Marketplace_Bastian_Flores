@@ -2,26 +2,26 @@ import { useContext } from "react";
 import { CartContext } from "../assets/CartContext";
 import { PostsContext } from "../assets/PostsContext";
 import { Col, Row } from "react-bootstrap";
-import CardProductCart from "./CardProductCart";
+import CardPostCart from "./CardPostCart";
 
 function ShoppingCartApp() {
 
 
     const { cart } = useContext(CartContext);
-    const { products } = useContext(PostsContext);
+    const { posts } = useContext(PostsContext);
 
     return (
         <>
             {cart.length > 0 ? (
                 <>
                     <Row md={2} className="m-3">
-                        {cart.map((cartItem) => {
-                            const product = products.find((p) => p.id === cartItem.id);
-                            return product ? (
+                        {cart.map((cart_item) => {
+                            const post = posts.find((p) => p.id === cart_item.id);
+                            return post ? (
                                 <Col md={3} className="mt-2 mb-2">
-                                    <CardProductCart
-                                        key={cartItem.id}
-                                        product={product}
+                                    <CardPostCart
+                                        key={cart_item.id}
+                                        post={post}
                                     />
                                 </Col>
                             ) : null;
@@ -30,7 +30,7 @@ function ShoppingCartApp() {
                 </>
 
             ) : (
-                <p>No hay productos en el carrito</p>
+                <p>No hay publicaciones en el carrito</p>
             )
             };
         </>

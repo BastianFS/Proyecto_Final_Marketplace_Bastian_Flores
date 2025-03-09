@@ -4,7 +4,7 @@ import Image from 'react-bootstrap/esm/Image';
 function Services() {
     return (
         <>
-            <Carousel className='text-center bg-dark bg-gradient'>
+            <Carousel className='text-center bg-dark bg-gradient mt-5'>
                 <Carousel.Item>
                     <Image src="background_music1.jpeg" style={{ width: "1345px", height: "500px", objectFit: "cover" }} fluid />;
                     <Carousel.Caption style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}>

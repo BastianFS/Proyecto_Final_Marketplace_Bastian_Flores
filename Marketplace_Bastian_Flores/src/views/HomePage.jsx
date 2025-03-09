@@ -1,11 +1,9 @@
 import BannerPromo from "../components/BannerPromo";
-import CardProductsReccomended from "../components/CardProductsRecommended";
-import CardSectionProducts from "../components/CardSectionProducts";
+import CardPostsReccomended from "../components/CardPostsReccomended";
 import CategoryMenu from "../components/CategoryMenu";
-import Contact from "../components/Contact";
 import DropDownMenu from "../components/DropDownMenu";
 import HeroPage from "../components/HeroPage";
-import ProductList from "../components/ProductList";
+import PostsList from "../components/PostsList";
 import Services from "../components/Services";
 
 function HomePage () {
@@ -14,9 +12,9 @@ function HomePage () {
            <DropDownMenu />
            <HeroPage />
            <CategoryMenu />
-           <CardProductsReccomended />
+           <CardPostsReccomended />
            <BannerPromo />
-           <ProductList />
+           <PostsList />
            <Services />
         </>
     );
