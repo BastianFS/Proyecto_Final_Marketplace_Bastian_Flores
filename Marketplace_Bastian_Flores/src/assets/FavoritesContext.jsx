@@ -22,7 +22,7 @@ export const FavoritesProvider = ({ children }) => {
     const getUserFavorites = async (user) => {
         setLoadingFav(true);
         try {
-            const response = await axios.get(`${VITE_API_URL}/favorites/${user.id}`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/favorites/${user.id}`, {
                 headers: { Authorization: `Bearer ${user.token}` },
             });
             setFavoritesPosts(response.data);
@@ -45,17 +45,17 @@ export const FavoritesProvider = ({ children }) => {
 
             if (!isFavorite) {
                 try{
-                 await axios.post(`${VITE_API_URL}/favorites/${post_id}`, {},{
+                 await axios.post(`${import.meta.env.VITE_API_URL}/favorites/${post_id}`, {},{
                     headers: {Authorization: `Bearer ${user?.token}` },
                 });
                 } catch (error) {
                     setErrorFav(`Error favoritos (POST): ${error}`)
                 }
-                const response = await axios.get(`${VITE_API_URL}/posts/${post_id}`)
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${post_id}`)
                 setFavoritesPosts([...favoritesPosts, response.data])
                 console.log(favoritesPosts);
             } else {
-                await axios.delete(`${VITE_API_URL}/favorites/${post_id}`, {
+                await axios.delete(`${import.meta.env.VITE_API_URL}/favorites/${post_id}`, {
                     headers: {Authorization: `Bearer ${user?.token}` },
                 });
                 setFavoritesPosts(favoritesPosts.filter(fav => fav.id !== post_id))

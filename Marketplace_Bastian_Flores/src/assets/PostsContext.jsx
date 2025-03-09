@@ -39,7 +39,7 @@ export const PostsProvider = ({ children }) => {
     function getPosts(filter, order) {
         setLoadingPosts(true);
         axios
-            .get(`${VITE_API_URL}/posts?filter=${filter}&order=${order}`)
+            .get(`${import.meta.env.VITE_API_URL}/posts?filter=${filter}&order=${order}`)
             .then((response) => {
                 setPosts(response.data);
             })

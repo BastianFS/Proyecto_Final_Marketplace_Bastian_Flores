@@ -24,7 +24,7 @@ export const UploadPostProvider = ({ children }) => {
             const userid = user.id;
             const int_price = parseInt(price);
             console.log(userid);
-            await axios.post(`${VITE_API_URL}/newpost`, { 
+            await axios.post(`${import.meta.env.VITE_API_URL}/newpost`, { 
                 name: name,
                 description: description,
                 price: int_price,

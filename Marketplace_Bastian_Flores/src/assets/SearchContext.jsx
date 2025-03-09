@@ -19,7 +19,7 @@ export const SearchProvider = ({ children }) => {
         setFailSearch(false);
         setLoadingSearch(true);
         try {
-            const response = await axios.get(`${VITE_API_URL}/search/posts?term=${searchTerm}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/search/posts?term=${searchTerm}`);
             setSearchPosts(response.data);
             navigate("/categorias")
         } catch (error) {
