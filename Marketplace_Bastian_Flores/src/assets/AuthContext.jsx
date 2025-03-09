@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         setAuthLoading(true);
         setAuthError(null);
         try {
-            const response = await axios.post('http://localhost:3000/login', { email, password });
+            const response = await axios.post(`${VITE_API_URL}/login`, { email, password });
             setUser(response.data);
             navigate("/perfil")
             if (error.response) {

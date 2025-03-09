@@ -1,13 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 

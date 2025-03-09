@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 
 import Image from "react-bootstrap/esm/Image";
 import Button from 'react-bootstrap/Button';
@@ -9,16 +7,19 @@ import HelpPrivacy from "./HelpPrivacy";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import { Alert } from "react-bootstrap";
+import { AuthContext } from "../assets/AuthContext";
+import axios from "axios";
 
 function RegisterForm() {
 
+    const {login} = useContext(AuthContext);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
+    
 
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,22 +36,14 @@ function RegisterForm() {
         }
 
         try {
-            const response = await fetch("http://localhost:3000/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password }),
+            const response = await axios.post(`${VITE_API_URL}/register`, { 
+                name,
+                password,
+                email
             });
 
             if (response.ok) {
-                const data = await response.json();
-
-                localStorage.setItem("email", email);
-                localStorage.setItem("name", name);
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("id", data.id);
-
-                setError("");
-                navigate("/perfil")
+                login(email, password);
             } else {
                 setError("Error al registrar usuario.");
             }
