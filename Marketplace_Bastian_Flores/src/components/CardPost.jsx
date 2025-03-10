@@ -4,23 +4,33 @@ import { CartContext } from '../assets/CartContext';
 
 import Button from 'react-bootstrap/Button';
 import { Stack, Container, Image, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FavoritesContext } from '../assets/FavoritesContext';
 import { AuthContext } from '../assets/AuthContext';
+import { PostsContext } from '../assets/PostsContext';
 
 function CardPost({ post }) {
 
     if (!post) return null;
     const { addToCart } = useContext(CartContext);
     const { user } = useContext(AuthContext);
-    const { favoritesPosts , toggleFavorite } = useContext(FavoritesContext)
+    const { favoritesPosts , toggleFavorite } = useContext(FavoritesContext);
+    const { setPostHandle } = useContext(PostsContext);
+
+    const navigate = useNavigate();
+    
+    const handleImage = (() => {
+        setPostHandle(post);
+        navigate("/publicacion");
+        }
+    );
 
     return (
         <>
         <Row>
             <Col>
             <Container style={{ width: "18rem" }} className='d-flex flex-column align-items-end border p-0 m-0 mb-5'>
-                <div style={{ height: "18rem" }} className='m-2 me-5'>
+                <div style={{ height: "18rem" }} className='m-2 me-5' onClick={handleImage}>
                     <Image fluid src={post.image_url} className='h-100' style={{ objectFit: "cover" }} />
                 </div>
                 <div style={{ height: "6rem" }} className='border-bottom'>

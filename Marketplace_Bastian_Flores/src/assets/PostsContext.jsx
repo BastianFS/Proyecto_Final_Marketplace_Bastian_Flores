@@ -12,6 +12,7 @@ export const PostsProvider = ({ children }) => {
     const [userPosts, setUserPosts] = useState([]);
     const [loadingUserPosts, setLoadingUserPosts] = useState(false);
     const { user } = useContext(AuthContext)
+    const [postHandle, setPostHandle] = useState("");
 
     const [order, setOrder] = useState("ASC");
     const [filter, setFilter] = useState("price");
@@ -52,7 +53,7 @@ export const PostsProvider = ({ children }) => {
     }
 
     return (
-        <PostsContext.Provider value={{ posts, loadingPosts, errorPosts, errorUserPosts, userPosts, loadingUserPosts, setOrder, setFilter }}>
+        <PostsContext.Provider value={{ posts, loadingPosts, errorPosts, errorUserPosts, userPosts, loadingUserPosts, setOrder, setFilter, postHandle, setPostHandle }}>
             {children}
         </PostsContext.Provider>
     );

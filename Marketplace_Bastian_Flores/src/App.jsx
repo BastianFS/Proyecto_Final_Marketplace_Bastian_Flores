@@ -22,6 +22,7 @@ import { AuthProvider } from './assets/AuthContext';
 import { SearchProvider } from './assets/SearchContext';
 import { UploadPostProvider } from './assets/UploadPostContext';
 import UploadPost from './views/UploadPost';
+import ProductPage from './views/ProductPage';
 
 function App() {
   return (
@@ -61,6 +62,9 @@ function App() {
                     <Route
                       path="/publicar"
                       element={<ProtectedRoutes><UploadPost /></ProtectedRoutes>} />
+                       <Route
+                      path="/publicacion"
+                      element={<ProductPage />} />
                   </Routes>
                   <Contact />
                 </SearchProvider>
