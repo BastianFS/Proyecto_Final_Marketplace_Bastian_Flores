@@ -36,17 +36,12 @@ function RegisterForm() {
         }
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/register`, { 
+                await axios.post(`${import.meta.env.VITE_API_URL}/register`, { 
                 name,
                 password,
                 email
             });
-
-            if (response.ok) {
-                login(email, password);
-            } else {
-                setError("Error al registrar usuario.");
-            }
+                await login({email, password});
         } catch (err) {
             setError("No se pudo conectar al servidor.");
         }
